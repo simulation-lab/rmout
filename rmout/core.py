@@ -1,4 +1,5 @@
 import os
+import sys
 import pathlib
 import click
 from send2trash import send2trash
@@ -35,7 +36,7 @@ def rmout(debug=True):
 
     target_ext_set = get_extensions_set(current_dir)
 
-    def extract_files_by_extlist(target_ext_set):
+    def extract_files_by_extlist(target_ext_set) -> list:
         # カレントディレクトリから拡張子リストに対応したファイルを抽出
 
         throwaway = []
@@ -60,18 +61,24 @@ def rmout(debug=True):
 
     throwaway = extract_files_by_extlist(target_ext_set)
 
-    def extract_target_from_userinput():
+    def extract_target_from_userinput() -> list:
         # input()からユーザー入力を取得し，ゴミ箱送り対象のコードリストを作成
 
         codes_string = input('send to trash [a]: ')
-        codes_string = codes_string.strip().strip(',')
+        codes_string = codes_string.strip()  # .strip(',')
         codelist = codes_string.split(',')
+        if len(set(codelist)) != len(codelist):
+            try:
+                raise ValueError('The input code may be duplicated.')
+            except ValueError as e:
+                print(f'{e} {codelist}')
+                sys.exit()
         codelist = [code.strip().lower() for code in codelist]
         return codelist
 
     codelist = extract_target_from_userinput()
 
-    def get_extensiondir_for_sendtotrash(codelist, throwaway):
+    def get_extensiondir_for_sendtotrash(codelist, throwaway) -> list:
         # ゴミ箱送りの拡張子辞書を取得
 
         if 'a' in codelist or '' in codelist:
@@ -85,15 +92,16 @@ def rmout(debug=True):
             invalid_codes = [code for code in codelist
                              if not code in ext_code_list]
             if invalid_codes:
-                raise TypeError(f'The input code is invalid. {invalid_codes}')
+                try:
+                    raise ValueError('The input code is invalid.')
+                except ValueError as e:
+                    print(f'{e} {invalid_codes}')
+                    sys.exit()
 
             # ユーザー入力と一致した拡張子ファイルを抽出
             renew_throwaway = [target for target in throwaway
                                if str(target['extension_code']) in codelist]
-            if renew_throwaway:
-                throwaway = renew_throwaway
-            else:
-                raise TypeError('The input code is invalid.')
+            throwaway = renew_throwaway
         return throwaway
 
     throwaway = get_extensiondir_for_sendtotrash(codelist, throwaway)
