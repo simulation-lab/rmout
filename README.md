@@ -16,14 +16,15 @@ $ pip install rmout
 
 ## Usage
 
-simple.
+Move to the directory containing the files you want to throw in the Trash and execute the following command.
 
 ```sh
 $ rmout
 ```
 
-In "send to trash [a]:", enter the extension code of the file you want to send to the Trash.
-If you press the ENTER key without typing, the files with the extensions listed will be sent from the directory to the Trash.
+In "send to trash [a]:", enter the extension code of the file you want to send to the Trash. The default is all files. If you press the ENTER key without typing, the files with the extensions listed will be sent from the directory to the Trash.
+
+If you enter the code to the left of the extension list separated by commas, you can select the file with the extension you want to discard.
 
 
 ```sh
