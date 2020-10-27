@@ -64,6 +64,7 @@ def rmout(debug=True):
         # input()からユーザー入力を取得し，ゴミ箱送り対象のコードリストを作成
 
         codes_string = input('send to trash [a]: ')
+        codes_string = codes_string.strip().strip(',')
         codelist = codes_string.split(',')
         codelist = [code.strip().lower() for code in codelist]
         return codelist
