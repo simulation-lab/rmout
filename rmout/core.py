@@ -84,7 +84,7 @@ def rmout(debug=True):
         if 'a' in codelist or '' in codelist:
             pass
         elif 'x' in codelist:
-            return None
+            return list()
         else:
             # 不正な入力の処理
             ext_code_list = [str(target['extension_code'])
