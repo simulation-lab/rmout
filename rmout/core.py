@@ -16,7 +16,7 @@ def rmout(debug=True):
 
     current_dir = os.getcwd()
 
-    def get_extensions_set(current_dir) -> set:
+    def _get_extensions_set(current_dir) -> set:
         # ゴミ箱送りファイルの拡張子リストを取得
 
         EXTENSION_FILE = '.rmoutrc'
@@ -34,10 +34,17 @@ def rmout(debug=True):
         target_ext_set = set(target_ext_list)
         return target_ext_set
 
-    target_ext_set = get_extensions_set(current_dir)
+    target_ext_set = _get_extensions_set(current_dir)
 
-    def extract_files_by_extlist(target_ext_set) -> list:
+    def _extract_files_by_extlist(target_ext_set) -> list:
         # カレントディレクトリから拡張子リストに対応したファイルを抽出
+
+        def _std_out(throwaway):
+            for target in throwaway:
+                print(
+                    f'{target["extension_code"]:6}: {target["extension"]}  {len(target["file_path"])}')
+            print(f'{"":5}a: all files')
+            print(f'{"":5}x: exit')
 
         throwaway = []
         target_extension_code = 0
@@ -53,17 +60,12 @@ def rmout(debug=True):
                     'extension': target_extension,
                     'file_path': target_files,
                 })
-
-        for target in throwaway:
-            print(
-                f'{target["extension_code"]:6}: {target["extension"]}  {len(target["file_path"])}')
-        print(f'{"":5}a: all files')
-        print(f'{"":5}x: exit')
+        _std_out(throwaway)
         return throwaway
 
-    throwaway = extract_files_by_extlist(target_ext_set)
+    throwaway = _extract_files_by_extlist(target_ext_set)
 
-    def extract_target_from_userinput() -> list:
+    def _extract_target_from_userinput() -> list:
         # input()からユーザー入力を取得し，ゴミ箱送り対象のコードリストを作成
 
         codes_string = input('send to trash [a]: ')
@@ -78,9 +80,9 @@ def rmout(debug=True):
         codelist = [code.strip().lower() for code in codelist]
         return codelist
 
-    codelist = extract_target_from_userinput()
+    codelist = _extract_target_from_userinput()
 
-    def get_extensiondir_for_sendtotrash(codelist, throwaway) -> list:
+    def _get_extensiondir_for_sendtotrash(codelist, throwaway) -> list:
         # ゴミ箱送りの拡張子辞書を取得
 
         if 'a' in codelist or '' in codelist:
@@ -106,9 +108,9 @@ def rmout(debug=True):
             throwaway = renew_throwaway
         return throwaway
 
-    throwaway = get_extensiondir_for_sendtotrash(codelist, throwaway)
+    throwaway = _get_extensiondir_for_sendtotrash(codelist, throwaway)
 
-    def send_to_trash(throwaway):
+    def _send_to_trash(throwaway):
         # 削除対象のファイルをゴミ箱へ送る
 
         if throwaway:
@@ -120,4 +122,4 @@ def rmout(debug=True):
                         print(os.path.basename(target_file_path))
                         send2trash(str(target_file_path))
 
-    send_to_trash(throwaway)
+    _send_to_trash(throwaway)
