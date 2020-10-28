@@ -3,16 +3,16 @@ import os
 
 class TestFiles:
 
-    def test_get_extensions_set(self, mocker, tmpdir_factory):
+    def test_get_extensions_set(self, mocker, tmpdir):
         from rmout import files
         from rmout.files import get_extensions_set
 
         RMOUTRC = '.rmoutrc'
-        current_dir = tmpdir_factory.mktemp('rmout_test_currentdir')
+        current_dir = tmpdir.mkdir('rmout_test_currentdir')
         curr_rmoutrc_file = current_dir.join(RMOUTRC)
         curr_rmoutrc_file.write('.dat\n.out\n.com\n')
 
-        home_dir = tmpdir_factory.mktemp('rmout_test_homedir')
+        home_dir = tmpdir.mkdir('rmout_test_homedir')
         home_rmoutrc_file = home_dir.join(RMOUTRC)
         home_rmoutrc_file.write('.odb\n.msg\n.sta\n')
         mocker.patch.object(files.pathlib.Path, 'home', return_value=home_dir)
@@ -21,12 +21,12 @@ class TestFiles:
 
         assert get_extensions_set(current_dir) == epected
 
-    def test_extract_files_by_extlist(self, mocker, tmpdir_factory):
+    def test_extract_files_by_extlist(self, mocker, tmpdir):
         from rmout import files
         from rmout.files import extract_files_by_extlist
 
         RMOUTRC = '.rmoutrc'
-        current_dir = tmpdir_factory.mktemp('rmout_test_currentdir')
+        current_dir = tmpdir.mkdir('rmout_test_currentdir')
         curr_rmoutrc_file = current_dir.join(RMOUTRC)
         curr_rmoutrc_file.write('.dat\n.out\n.com\n')
 
