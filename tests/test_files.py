@@ -4,7 +4,7 @@ import os
 
 class TestFiles:
 
-    def test_current_dir(self, mocker, tmpdir_factory):
+    def test_get_extensions_set(self, mocker, tmpdir_factory):
         from rmout import files
         from rmout.files import get_extensions_set
 
@@ -22,25 +22,29 @@ class TestFiles:
 
         assert get_extensions_set(current_dir) == epected
 
-    def test_tmpdir(self, tmpdir):
-        a_sub_dir = tmpdir.mkdir('anything')
-        a_file = a_sub_dir.join('something.txt')
-        another_file = a_sub_dir.join('something_else.txt')
-        a_file.write('contents may settle during shipping')
-        another_file.write('something different')
+    def test_extract_files_by_extlist(self, mocker, tmpdir_factory):
+        from rmout import files
+        from rmout.files import extract_files_by_extlist
 
-        assert a_file.read() == 'contents may settle during shipping'
-        assert another_file.read() == 'something different'
+        RMOUTRC = '.rmoutrc'
+        current_dir = tmpdir_factory.mktemp('rmout_test_currentdir')
+        curr_rmoutrc_file = current_dir.join(RMOUTRC)
+        curr_rmoutrc_file.write('.dat\n.out\n.com\n')
 
-    def test_create_file(self, tmpdir):
-        p = tmpdir.mkdir("sub").join("hello.txt")
-        p.write("content")
-        assert p.read() == "content"
-        assert len(tmpdir.listdir()) == 1
+        target_ext_set = {'.sta', '.odb', '.com', '.msg', '.out', '.dat'}
+        mocker.patch.object(files, 'sorted', return_value=target_ext_set)
 
-    # def test_get_extensions_set(self, current_dir):
-    #     from rmout.files import get_extensions_set
-        # target_ext_set = get_extensions_set(current_dir)
-        # print(current_dir.read())
+        for ext in target_ext_set:
+            f = current_dir.join('job1' + ext)
+            f.write('test')
 
-        # assert current_dir.read() == '.dat\n.out\n.com\n'
+        # TODO
+        # _std_out()
+
+        throwaway = extract_files_by_extlist(target_ext_set, current_dir)
+        filelist = [file['file_path'][0] for file in throwaway]
+        filelist = [os.path.basename(str(filepath)) for filepath in filelist]
+        fileset = set(filelist)
+        expected = {'job1.odb', 'job1.com', 'job1.dat',
+                    'job1.sta', 'job1.out', 'job1.msg'}
+        assert fileset == expected
