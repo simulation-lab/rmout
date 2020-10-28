@@ -17,7 +17,7 @@ setup(
     packages=find_packages(exclude=('tests',)),
     install_requires=[
         'click~=7.1',
-        'send2trash',
+        'send2trash~=1.5',
     ],
 
     entry_points={
