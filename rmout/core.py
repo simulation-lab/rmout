@@ -48,15 +48,17 @@ def rmout(debug=True):
                             if os.path.isfile(os.path.join(current_dir, f))]
             if target_files:
                 target_extension_code += 1
-                print(
-                    f'{target_extension_code}: {target_extension}  {len(target_files)}')
                 throwaway.append({
                     'extension_code': target_extension_code,
                     'extension': target_extension,
                     'file_path': target_files,
                 })
-        print('a:  all files')
-        print('x:  exit')
+
+        for target in throwaway:
+            print(
+                f'{target["extension_code"]:6}: {target["extension"]}  {len(target["file_path"])}')
+        print(f'{"":5}a: all files')
+        print(f'{"":5}x: exit')
         return throwaway
 
     throwaway = extract_files_by_extlist(target_ext_set)
