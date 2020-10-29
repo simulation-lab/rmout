@@ -6,7 +6,7 @@ from send2trash import send2trash
 def extract_target_from_userinput() -> list:
     # input()からユーザー入力を取得し，ゴミ箱送り対象のコードリストを作成
 
-    codes_string = input('send to trash [a]: ')
+    codes_string = input('send to trash [a] ? ')
     codes_string = codes_string.strip()  # .strip(',')
     codelist = codes_string.split(',')
     if len(set(codelist)) != len(codelist):
