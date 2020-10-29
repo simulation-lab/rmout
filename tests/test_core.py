@@ -1,9 +1,8 @@
 from click.testing import CliRunner
-from contextlib import contextmanager
 from rmout import core
 
 
-def test_no_args(mocker):
+def test_run_no_args(mocker):
     mocker.patch.object(core, 'rmout', return_value=None)
     runner = CliRunner()
     result = runner.invoke(core.run, [])
