@@ -1,5 +1,4 @@
 import os
-import sys
 from send2trash import send2trash
 
 
@@ -14,7 +13,7 @@ def extract_target_from_userinput() -> list:
             raise ValueError('The input code may be duplicated.')
         except ValueError as e:
             print(f'{e} {codelist}')
-            sys.exit()
+            return list()
     codelist = [code.strip().lower() for code in codelist]
     return codelist
 
@@ -37,7 +36,7 @@ def get_extensiondir_for_sendtotrash(codelist, throwaway) -> list:
                 raise ValueError('The input code is invalid.')
             except ValueError as e:
                 print(f'{e} {invalid_codes}')
-                sys.exit()
+                return list()
 
         # ユーザー入力と一致した拡張子ファイルを抽出
         renew_throwaway = [target for target in throwaway
@@ -46,7 +45,7 @@ def get_extensiondir_for_sendtotrash(codelist, throwaway) -> list:
     return throwaway
 
 
-def send_to_trash(throwaway, debug=False):
+def send_to_trash(throwaway, debug=False) -> None:
     # 削除対象のファイルをゴミ箱へ送る
 
     if throwaway:
