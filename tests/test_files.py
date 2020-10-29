@@ -21,7 +21,7 @@ class TestFiles:
 
         assert get_extensions_set(current_dir) == epected
 
-    def test_extract_files_by_extlist(self, mocker, tmpdir):
+    def test_extract_files_by_extlist(self, mocker, tmpdir, _std_out):
         from rmout import files
         from rmout.files import extract_files_by_extlist
 
