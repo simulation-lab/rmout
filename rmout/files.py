@@ -21,15 +21,16 @@ def get_extensions_set(current_dir) -> set:
     return target_ext_set
 
 
+def _std_out(throwaway) -> None:
+    for target in throwaway:
+        print(
+            f'{target["extension_code"]:6}: {target["extension"]}  {len(target["file_path"])}')
+    print(f'{"":5}a: all files')
+    print(f'{"":5}x: exit')
+
+
 def extract_files_by_extlist(target_ext_set, current_dir) -> list:
     # カレントディレクトリから拡張子リストに対応したファイルを抽出
-
-    def _std_out(throwaway):
-        for target in throwaway:
-            print(
-                f'{target["extension_code"]:6}: {target["extension"]}  {len(target["file_path"])}')
-        print(f'{"":5}a: all files')
-        print(f'{"":5}x: exit')
 
     throwaway = []
     target_extension_code = 0
