@@ -14,7 +14,7 @@ from rmout.trash import (
 
 @click.command()
 def run():
-    debug = True
+    debug = False
     rmout(debug)
     click.echo('finished.')
 
