@@ -12,6 +12,7 @@ class TestTrash:
     def test_extract_target_from_userinput(self, mocker, codes_string, expected):
         from rmout import trash
         from rmout.trash import extract_target_from_userinput
+
         mocker.patch.object(trash, 'input', return_value=codes_string)
         codelist = extract_target_from_userinput()
         assert codelist == expected
@@ -44,17 +45,34 @@ class TestTrash:
             (['1', '2'], 2),
             (['a'], 6),
         ])
-    def test_get_extensiondir_for_sendtotrash(self, codelist, trash_candidate, expected):
-        from rmout import trash
+    def test_get_extensiondir_for_sendtotrash(self, _std_out, codelist, trash_candidate, expected):
         from rmout.trash import get_extensiondir_for_sendtotrash
         # check 1
-        throwaway = get_extensiondir_for_sendtotrash(
-            codelist, trash_candidate)
+        throwaway = get_extensiondir_for_sendtotrash(codelist, trash_candidate)
         assert len(throwaway) == expected
         # check 2
         ext_code = set(range(1, expected + 1))
         take_content = set([c['extension_code'] for c in throwaway])
         assert take_content == ext_code
 
-    def test_send_to_trash(self, mocker):
-        pass
+    @pytest.mark.parametrize(
+        # codelist: extension's code
+        # expected: file number
+        'codelist, expected', [
+            (['1', '2'], 2),
+            (['a'], 6),
+        ])
+    def test_send_to_trash(self, mocker, capfd, _std_out, codelist, trash_candidate, expected):
+        from rmout import trash
+        from rmout.trash import (
+            get_extensiondir_for_sendtotrash,
+            send_to_trash,
+        )
+        mocker.patch.object(trash, 'send2trash', return_value=None)
+        throwaway = get_extensiondir_for_sendtotrash(codelist, trash_candidate)
+        send_to_trash(throwaway, debug=False)
+
+        out, err = capfd.readouterr()
+        filelist = out.split('\n')
+        filelist = [f for f in filelist if f]
+        assert len(filelist) == expected
