@@ -40,7 +40,7 @@ $ rmout
 9: *.sta  2
 a:  all files
 x:  exit
-send to trash [a]: 1
+send to trash [a] ? 1, 3
 job01.com
 job02.com
 finished.
