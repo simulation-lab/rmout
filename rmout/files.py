@@ -5,23 +5,30 @@ import pathlib
 def get_extensions_set(current_dir) -> set:
     # ゴミ箱送りファイルの拡張子リストを取得
 
+    def _file_not_found_process():
+        print(f'The {EXTENSION_FILE} file could not be found.')
+        print('Please create.')
+
     EXTENSION_FILE = '.rmoutrc'
     home_dir = pathlib.Path.home()
     extfile_in_curr = os.path.join(current_dir, EXTENSION_FILE)
     extfile_in_home = os.path.join(home_dir, EXTENSION_FILE)
+    print(extfile_in_curr)
+    print(extfile_in_home)
 
     target_ext_list = []
     if os.path.isfile(extfile_in_home):
         with open(extfile_in_home, 'r') as f:
-            target_ext_list += [e.strip() for e in f.readlines()]
+            target_ext_list += [e.strip() for e in f.readlines() if e.strip()]
     if os.path.isfile(extfile_in_curr):
         with open(extfile_in_curr, 'r') as f:
-            target_ext_list += [e.strip() for e in f.readlines()]
-    if not target_ext_list:
-        print(f'The {EXTENSION_FILE} file could not be found.')
-        print('Please create.')
-    target_ext_set = set(target_ext_list)
-    return target_ext_set
+            target_ext_list += [e.strip() for e in f.readlines() if e.strip()]
+    if target_ext_list:
+        target_ext_set = set(target_ext_list)
+        return target_ext_set
+    else:
+        print('The file to be deleted cannot be found.')
+        return set()
 
 
 def _std_out(throwaway) -> None:
