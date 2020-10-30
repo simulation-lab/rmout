@@ -12,7 +12,9 @@ from rmout.trash import (
 )
 
 
-@click.command()
+@click.command(help='\
+rmout is a tool that throws files with the extension written \
+in the .rmoutrc file into the trash.')
 def run():
     debug = False
     rmout(debug)
@@ -22,6 +24,8 @@ def run():
 def rmout(debug=True):
     current_dir = os.getcwd()
     target_ext_set = get_extensions_set(current_dir)
+    if not target_ext_set:
+        return
     trash_candidate = extract_files_by_extlist(target_ext_set, current_dir)
     codelist = extract_target_from_userinput()
     throwaway = get_extensiondir_for_sendtotrash(codelist, trash_candidate)

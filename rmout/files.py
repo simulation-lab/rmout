@@ -17,6 +17,9 @@ def get_extensions_set(current_dir) -> set:
     if os.path.isfile(extfile_in_curr):
         with open(extfile_in_curr, 'r') as f:
             target_ext_list += [e.strip() for e in f.readlines()]
+    if not target_ext_list:
+        print(f'The {EXTENSION_FILE} file could not be found.')
+        print('Please create.')
     target_ext_set = set(target_ext_list)
     return target_ext_set
 
