@@ -27,6 +27,8 @@ def rmout(debug=True):
     if not target_ext_set:
         return
     trash_candidate = extract_files_by_extlist(target_ext_set, current_dir)
+    if not trash_candidate:
+        return
     codelist = extract_target_from_userinput()
     throwaway = get_extensiondir_for_sendtotrash(codelist, trash_candidate)
     send_to_trash(throwaway, debug)
