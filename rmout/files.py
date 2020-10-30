@@ -54,4 +54,5 @@ def extract_files_by_extlist(target_ext_set, current_dir) -> list:
         _std_out(throwaway)
         return throwaway
     else:
-        return throwaway
+        print('The file to be deleted cannot be found.')
+        return list()
