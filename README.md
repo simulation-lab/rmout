@@ -16,6 +16,17 @@ $ pip install rmout
 
 ## Usage
 
+Create a ".rmoutrc" file under your home directory or current directory.
+In the file, list the extensions of the files to be deleted.
+
+.rmoutrc file
+
+```.rmoutrc
+.sim
+.prt
+.dat
+```
+
 Move to the directory containing the files you want to throw in the Trash and execute the following command.
 
 ```sh
@@ -29,17 +40,17 @@ If you enter the code to the left of the extension list separated by commas, you
 
 ```sh
 $ rmout
-1: *.com  2
-2: *.dat  2
-3: *.log  1
-4: *.msg  2
-5: *.odb  2
-6: *.oke  1
-7: *.prt  2
-8: *.sim  2
-9: *.sta  2
-a:  all files
-x:  exit
+     1: *.com  2
+     2: *.dat  2
+     3: *.log  1
+     4: *.msg  2
+     5: *.odb  2
+     6: *.oke  1
+     7: *.prt  2
+     8: *.sim  2
+     9: *.sta  2
+     a:  all files
+     x:  exit
 send to trash [a] ? 1, 5
 job01.com
 job02.com
