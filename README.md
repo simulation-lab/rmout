@@ -4,7 +4,6 @@
 Create a list of file extensions to be deleted in the home directory and current directory in advance with the name ".rmoutrc".
 
 [![PyPI Version](https://img.shields.io/pypi/v/rmout.svg??style=flat&color=blue)](https://pypi.org/project/rmout/)
-
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 
 
