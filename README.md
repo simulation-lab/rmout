@@ -1,6 +1,6 @@
 # rmout
 
-'rmout' is a tool for throwing unnecessary files in a directory into the trash.
+rmout is a tool for throwing unnecessary files in a directory into the trash.
 Create a list of file extensions to be deleted in the home directory and current directory in advance with the name ".rmoutrc".
 
 [![PyPI Version](https://img.shields.io/pypi/v/rmout.svg??style=flat)](https://pypi.org/project/rmout/)

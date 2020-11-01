@@ -3,13 +3,13 @@ from setuptools import find_packages, setup
 
 setup(
     name='rmout',
-    version='0.1.7',
+    version='0.1.8',
 
     author='kino',
     author_email='simulation.space.labs@gmail.com',
     url='https://github.com/simulation-lab/rmout',
 
-    description='',
+    description='rmout is a tool for throwing unnecessary files in a directory into the trash.',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
 
