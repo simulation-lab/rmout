@@ -22,7 +22,7 @@ $ pip install rmout
 Create a ".rmoutrc" file under your home directory or current directory.
 In the file, list the extensions of the files to be deleted.
 
-.rmoutrc file
+Create a .rmoutrc file in the home.
 
 ```.rmoutrc
 .sim
