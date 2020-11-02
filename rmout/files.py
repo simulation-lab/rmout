@@ -17,8 +17,7 @@ def get_extensions_set(current_dir) -> set:
     if os.path.isfile(extfile_in_curr):
         with open(extfile_in_curr, 'r') as f:
             target_ext_list += [e.strip() for e in f.readlines() if e.strip()]
-    if target_ext_list:
-        target_ext_set = set(target_ext_list)
+    if target_ext_set := set(target_ext_list):
         return target_ext_set
     else:
         print('The file to be deleted cannot be found.')
