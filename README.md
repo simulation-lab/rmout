@@ -4,6 +4,7 @@ rmout is a tool for throwing unnecessary files in a directory into the trash.
 Create a list of file extensions to be deleted in the home directory and current directory in advance with the name ".rmoutrc".
 
 [![PyPI Version](https://img.shields.io/pypi/v/rmout.svg??style=flat)](https://pypi.org/project/rmout/)
+![GitHub Actions](https://github.com/simulation-lab/rmout/workflows/GitHub%20Actions/badge.svg)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 
 
