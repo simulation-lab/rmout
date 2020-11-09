@@ -64,7 +64,7 @@ class TestFiles:
             f.write('test')
 
         throwaway = extract_files_by_extlist(target_ext_set, current_dir)
-        filelist = [file['file_path'][0] for file in throwaway]
+        filelist = [file['file_path'][0] for file in throwaway]  # WindowsPath型に配慮
         filelist = [os.path.basename(str(filepath)) for filepath in filelist]
         fileset = set(filelist)
         expected = {'job1.odb', 'job1.com', 'job1.dat',
