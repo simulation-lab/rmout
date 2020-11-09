@@ -16,21 +16,42 @@ class TestCore:
         assert result.exit_code == expected_code
         assert result.output == expected_output + '\n'
 
-    def test_rmout(self, mocker, tmpdir):
+    @pytest.mark.parametrize(
+        'target_ext_set, trash_candidate, throwaway', [
+            (set(['.sta']),
+             [{
+                 'extension_code': 1,
+                 'extension': '*.sta',
+                 'file_path': 'test1.sta',
+             }],
+             [{
+                 'extension_code': 1,
+                 'extension': '*.sta',
+                 'file_path': 'test1.sta',
+             }]),
+            (set(),
+             [{
+                 'extension_code': 1,
+                 'extension': '*.sta',
+                 'file_path': 'test1.sta',
+             }],
+             [{
+                 'extension_code': 1,
+                 'extension': '*.sta',
+                 'file_path': 'test1.sta',
+             }]),
+            (set(['.sta']),
+             [],
+             [{
+                 'extension_code': 1,
+                 'extension': '*.sta',
+                 'file_path': 'test1.sta',
+             }]),
+        ])
+    def test_rmout(self, mocker, tmpdir, target_ext_set, trash_candidate, throwaway):
         from rmout import core
         from rmout.core import rmout
         from rmout.core import os
-        target_ext_set = set(['.sta'])
-        trash_candidate = [{
-            'extension_code': 1,
-            'extension': '*.sta',
-            'file_path': 'test1.sta',
-        }]
-        throwaway = [{
-            'extension_code': 1,
-            'extension': '*.sta',
-            'file_path': 'test1.sta',
-        }]
         current_dir = tmpdir.mkdir('rmout_test_currentdir')
         curr_rmoutrc_file = current_dir.join(self.RMOUTRC)
         curr_rmoutrc_file.write('.dat\n.out\n.com\n')
