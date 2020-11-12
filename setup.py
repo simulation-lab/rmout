@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='rmout',
-    version='0.1.8',
+    version='0.2.0',
 
     author='kino',
     author_email='simulation.space.labs@gmail.com',
