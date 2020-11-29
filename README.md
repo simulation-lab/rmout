@@ -5,6 +5,7 @@ Create a list of file extensions to be deleted in the home directory and current
 
 [![PyPI Version](https://img.shields.io/pypi/v/rmout.svg??style=flat)](https://pypi.org/project/rmout/)
 ![GitHub Actions](https://github.com/simulation-lab/rmout/workflows/GitHub%20Actions/badge.svg)
+![CodeQL](https://github.com/simulation-lab/rmout/workflows/CodeQL/badge.svg)
 ![Coverage](https://labs.psycho-frame.com/github/workflows/rmout/badge-coverage.svg)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 
