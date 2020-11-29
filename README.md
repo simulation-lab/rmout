@@ -1,7 +1,7 @@
 # rmout
 
 rmout is a tool for throwing unnecessary files in a directory into the trash.
-Create a list of file extensions to be deleted in the home directory and current directory in advance with the name ".rmoutrc".
+
 
 [![PyPI Version](https://img.shields.io/pypi/v/rmout.svg??style=flat)](https://pypi.org/project/rmout/)
 ![GitHub Actions](https://github.com/simulation-lab/rmout/workflows/GitHub%20Actions/badge.svg)
@@ -25,6 +25,8 @@ $ pip install rmout
 Create a ".rmoutrc" file under your home directory or current directory.
 In the file, list the extensions of the files to be deleted.
 
+example: `.rmoutrc` file
+
 ```.rmoutrc
 .sim
 .prt
@@ -37,9 +39,10 @@ Move to the directory containing the files you want to throw in the Trash and ex
 $ rmout
 ```
 
-In "send to trash [a] ? ", enter the extension code of the file you want to send to the Trash. The default is all files. If you press the ENTER key without typing, the files with the extensions listed will be sent from the directory to the Trash.
+In "send to trash [a] ? ", enter the extension code of the file you want to send to the Trash. The default is all files. That is [a]. If you press the ENTER key without typing, the files with the extensions listed will be sent from the directory to the Trash.
 
 If you enter the code to the left of the extension list separated by commas, you can select the file with the extension you want to discard.
+
 
 
 ```sh
