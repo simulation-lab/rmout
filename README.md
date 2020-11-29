@@ -13,7 +13,7 @@ rmout is a tool for throwing unnecessary files in a directory into the trash.
 ## Installation
 
 
-Anaconda, venv
+conda, venv
 
 ```sh
 $ pip install rmout
