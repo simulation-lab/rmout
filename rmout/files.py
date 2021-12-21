@@ -1,8 +1,9 @@
 import os
 import pathlib
+from typing import Set
 
 
-def get_extensions_set(current_dir) -> set:
+def get_extensions_set(current_dir: str) -> set:
     # ゴミ箱送りファイルの拡張子リストを取得
 
     EXTENSION_FILE = '.rmoutrc'
@@ -24,7 +25,7 @@ def get_extensions_set(current_dir) -> set:
         return set()
 
 
-def _std_out(throwaway) -> None:
+def _std_out(throwaway: list) -> None:
     for target in throwaway:
         print(
             f'{target["extension_code"]:6}: {target["extension"]}  {len(target["file_path"])}')
@@ -32,7 +33,7 @@ def _std_out(throwaway) -> None:
     print(f'{"":5}x: exit')
 
 
-def extract_files_by_extlist(target_ext_set, current_dir) -> list:
+def extract_files_by_extlist(target_ext_set: set, current_dir: str) -> list:
     # カレントディレクトリから拡張子リストに対応したファイルを抽出
 
     throwaway = []

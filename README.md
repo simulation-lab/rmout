@@ -7,7 +7,6 @@ rmout is a tool for throwing unnecessary files in a directory into the trash.
 ![GitHub Actions](https://github.com/simulation-lab/rmout/workflows/GitHub%20Actions/badge.svg)
 ![CodeQL](https://github.com/simulation-lab/rmout/workflows/CodeQL/badge.svg)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
-[![Downloads](https://pepy.tech/badge/rmout)](https://pepy.tech/project/rmout)
 
 
 ## Installation

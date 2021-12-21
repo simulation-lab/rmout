@@ -11,11 +11,14 @@ from rmout.trash import (
     send_to_trash,
 )
 
+description = """
+rmout is a tool that throws files with the extension written
+in the .rmoutrc file into the trash.
+"""
 
-@click.command(help='\
-rmout is a tool that throws files with the extension written \
-in the .rmoutrc file into the trash.')
-def run():
+
+@click.command(help=description)
+def run() -> None:
     debug = False
     rmout(debug)
     click.echo('finished.')

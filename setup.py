@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='rmout',
-    version='0.2.0',
+    version='0.3.0',
 
     author='kino',
     author_email='simulation.space.labs@gmail.com',
@@ -31,6 +31,7 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
         'Operating System :: OS Independent',
     ],
 
